@@ -21,7 +21,7 @@ function Input(props) {
 
     // }, [inputTexto, props]);
 
-    props.texto(inputTexto);
+    
 
     function enviarTecla(e) {
         if(e.key === "Enter") {
@@ -43,7 +43,7 @@ function Input(props) {
             value={inputTexto}
             placeholder={props.placeholder || ""}
             className={props.className || ""}
-            onChange={(e) => setInputTexto(e.target.value)}
+            onChange={(e) => { setInputTexto(e.target.value);  props.texto(inputTexto); }}
             onKeyUp={enviarTecla}
             />
         </>

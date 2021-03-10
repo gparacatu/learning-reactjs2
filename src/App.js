@@ -34,20 +34,18 @@ function App() {
 
   useEffect(() => {
 
-    setList([
+    setList(JSON.parse(localStorage.getItem("tarefas")))
+    // setList([
 
-      {titulo: "Acordar cedo", feito: false},
-      {titulo: "Tomar banho", feito: false},
-      {titulo: "Tomar café", feito: false},
-      {titulo: "Estudar muito", feito: false}
+    //   {titulo: "Acordar cedo", feito: false},
+    //   {titulo: "Tomar banho", feito: false},
+    //   {titulo: "Tomar café", feito: false},
+    //   {titulo: "Estudar muito", feito: false}
 
-    ]);
+    // ]);
 
   }, []);
 
-  // function buscarTexto(novoTexto) {
-  //   setDivTexto(novoTexto);
-  // }
   function addValor(novoValor) {
     let novaLista = [...list, {titulo: novoValor, feito: false}];
     setList(novaLista);
@@ -60,11 +58,17 @@ function App() {
     setList(novaLista);
   }
 
+  function salvarDadosStorage() {
+    if(list.length > 0){
+      localStorage.setItem("tarefas", JSON.stringify(list));
+    }    
+  }
+  salvarDadosStorage();
   return (
     <>
       <H1>Bora contar: {incremento}</H1>
       <ButtonDefault texto="Incremento" click={() => setIncremento(incremento + 1)}/>
-      <Input texto={(novoTexto) => setDivTexto(novoTexto)} valorLista={addValor} placeholder="Digite uma nova tarefa e pressione <Enter>..."/>
+      <Input texto={(e) => setDivTexto(e)} valorLista={addValor} placeholder="Digite uma nova tarefa e pressione <Enter>..."/>
       <div>
         Caractere{divTexto.length > 1 && "s"} : {divTexto.length}
       </div>
