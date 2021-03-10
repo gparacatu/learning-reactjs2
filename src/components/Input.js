@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import styled from "styled-components";
 
 const INPUT = styled.input`
@@ -7,6 +7,8 @@ const INPUT = styled.input`
     border: 1px solid black;
     border-radius: 4px;
     color: #GGG;
+    margin-top: 50px;
+    padding: 0px 10px;
 
 `;
 
@@ -20,7 +22,17 @@ function Input(props) {
     // }, [inputTexto, props]);
 
     props.texto(inputTexto);
-    
+
+    function enviarTecla(e) {
+        if(e.key === "Enter") {
+           
+            if (props.valorLista) {
+                props.valorLista(inputTexto);
+            }
+            setInputTexto("");
+        }
+    }
+
     return (
 
         <>
@@ -32,6 +44,7 @@ function Input(props) {
             placeholder={props.placeholder || ""}
             className={props.className || ""}
             onChange={(e) => setInputTexto(e.target.value)}
+            onKeyUp={enviarTecla}
             />
         </>
 
